@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.novel.dao.BookListMapper">
+    <resultMap id="booklist" type="com.example.novel.po.BookList">
+        <id column="id" property="id"></id>
+        <collection property="size" select="com.example.novel.dao.BookListMapper.getBookListSize" column="id"></collection>
+        <collection property="novels" select="com.example.novel.dao.BookListMapper.getNovelsInBookList" column="id" ></collection>
+    </resultMap>
+    <select id="getOneBookList" resultMap="booklist" parameterType="java.lang.Long">
+        SELECT * FROM booklist WHERE id=#{id}
+    </select>
+</mapper>

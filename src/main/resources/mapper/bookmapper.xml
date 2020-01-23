@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.novel.dao.BookMapper">
+
+    <resultMap id="book" type="com.example.novel.po.Book">
+        <result property="createTime" column="createTime"></result>
+        <collection property="novel" ofType="com.example.novel.po.Novel">
+            <result column="novel_id" property="id"></result>
+            <result column="n_name" property="nName"></result>
+            <result column="n_anthor" property="nAnthor"></result>
+            <result column="description" property="description"></result>
+            <result column="n_photo" property="nPhoto"></result>
+            <result column="url" property="url"></result>
+            <result column="mark" property="mark"></result>
+        </collection>
+    </resultMap>
+
+    <select id="getNovels" resultMap="book" parameterType="java.lang.Long">
+        SELECT * FROM bookshelf s,novel n WHERE s.id=#{id} AND n.id=s.novel_id
+    </select>
+    
+    <insert id="insertBook">
+       INSERT INTO bookshelf (id, novel_id,createTime) VALUES (#{id},#{nId},#{date});
+    </insert>
+
+    <delete id="deleteBook">
+        DELETE FROM bookshelf WHERE id=#{id} AND novel_id=#{nId}
+    </delete>
+
+</mapper>

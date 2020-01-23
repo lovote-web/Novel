@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.novel.dao.BillboardMapper">
+    <resultMap id="billboard" type="com.example.novel.po.Billboard">
+        <id property="id" column="id"></id>
+        <collection property="novels" select="com.example.novel.dao.BillboardMapper.getBillboardNovels" column="id"></collection>
+    </resultMap>
+    <select id="getBillboard" parameterType="java.lang.Long" resultMap="billboard">
+        SELECT * FROM billboard WHERE id=#{id}
+    </select>
+
+    <select id="getAllBillboard" resultMap="billboard">
+        SELECT * FROM billboard
+    </select>
+</mapper>
